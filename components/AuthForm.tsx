@@ -20,6 +20,7 @@ import { Loader2 } from 'lucide-react'
 import CustomInput from './CustomInput'
 import { authFormSchema } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
+import { signIn, signUp } from '@/lib/actions/user.actions'
 
 
 
@@ -56,17 +57,17 @@ function AuthForm({ type }: { type: string }) {
         try {
             // sign up with appwrite & create plan link token
             if ( type === 'sign-up' ) {
-                // const newUser = await signUp(values)
-                // setUser(newUser)
+                const newUser = await signUp(values)
+                setUser(newUser)
             }
 
             if ( type === 'sign-in' ) {
-                // const response = await signIn({
-                //     email : values.email,
-                //     password : values.password,
-                // })
+                const response = await signIn({
+                    email : values.email,
+                    password : values.password,
+                })
 
-                // if ( response ) router.push('/')
+                if ( response ) router.push('/')
             }
         } catch (error) {
             console.log(error)
